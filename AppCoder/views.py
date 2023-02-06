@@ -3,8 +3,17 @@ from django.shortcuts import render
 from AppCoder.models import *
 
 # Create your views here.
-def vistaCurso(self):
-    curso = Curso(nombre = "Desarrollo Web", comision = 19800)
-    curso.save()
-    docDeTexto = f"--> Curso: {curso.nombre} --> Comisión: {curso.comision}"
-    return HttpResponse(docDeTexto)
+def inicio(request):
+    return HttpResponse("Vista Inicio")
+
+def cursos(request):
+    return HttpResponse("Vista Cursos")
+
+def profesores(request):
+    return HttpResponse("Vista Profesores")
+
+def entregables(request):
+    return HttpResponse("Vista Entregables")
+
+def estudiantes(request):
+    return HttpResponse("Vista Estudiantes")
