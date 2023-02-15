@@ -57,3 +57,18 @@ def profesorFormulario(request):
         miFormulario = ProfesorFormulario()
     
     return render(request, "../templates/AppCoder/profesorFormulario.html", {"miFormulario":miFormulario})
+
+def busquedaCamada(request):
+     return render(request, "../templates/AppCoder/busquedaCamada.html")
+
+def buscar(request):
+    if request.GET["camada"]:
+        camada = request.GET["camada"]
+        cursos = Curso.objects.filter(comision__icontains=camada)
+
+        return render(request, "../templates/AppCoder/resultadosBusqueda.html", {"cursos":cursos, "camada":camada})
+
+    else:
+        respuesta = "Datos no enviados"
+        
+    return HttpResponse(respuesta)
