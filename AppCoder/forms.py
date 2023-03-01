@@ -36,3 +36,13 @@ class UserEditForm(UserCreationForm): #Qué se va a modificar del usuario
         model = User
         fields = ["email", "password1", "password2", "first_name", "last_name"]
         help_texts = {k: "" for k in fields} #Quito los msjs de ayuda
+
+class AvatarFormulario(UserCreationForm):
+    imagen = forms.ImageField()
+    password1 = None
+    password2 = None
+
+    class Meta:
+        model = User
+        fields = ["imagen"]
+        help_texts = {k: "" for k in fields}

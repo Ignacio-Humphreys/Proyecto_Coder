@@ -15,7 +15,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def inicio(request):
-    return render(request, "../templates/AppCoder/inicio.html")
+    avatares = Avatar.objects.filter(user=request.user.id)
+    return render(request, "../templates/AppCoder/inicio.html", {"url":avatares[0].imagen.url})
 
 def cursos(request):
     return render(request, "../templates/AppCoder/cursos.html")
@@ -199,3 +200,20 @@ def editarPerfil(request):
         miFormulario = UserEditForm(initial={"email":usuario.email})
 
     return render(request, "../templates/AppCoder/editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        miFormulario = AvatarFormulario(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user=u, imagen=miFormulario.cleaned_data["imagen"])
+            avatar.save()
+
+            return render(request, "../templates/AppCoder/inicio.html")
+        
+    else:
+        miFormulario = AvatarFormulario()
+
+    return render(request, "../templates/AppCoder/agregarAvatar.html", {"miFormulario":miFormulario})

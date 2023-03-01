@@ -30,7 +30,8 @@
                 {% endif %}
 
                 {% if request.user.is_authenticated %}
-                <p class="text-muted small mb-4 mb-lg-0">Bienvenido {{user.username}}</p>
+                <img src="{{url}}" style="max-height: 40px; max-width: 40px;"><!--Solo anda en el inicio-->
+                <p class="text-muted small mb-4 mb-lg-0">Bienvenido {{user.username}}</p>   
                 <a class="btn btn-primary" href="{% url 'Logout' %}">Logout</a>
                 {% endif %}
             </div>
